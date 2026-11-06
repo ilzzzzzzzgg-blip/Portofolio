@@ -1,0 +1,8 @@
+{
+  "name": "Ilzz - Vibe Coder Portfolio",
+  "description": "Website portofolio minimalis Ilzz, Vibe Coder yang membangun produk digital inovatif lewat kolaborasi dengan AI.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

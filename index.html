@@ -1,0 +1,3168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ilzz — Vibe Coder | Portofolio</title>
+  <meta name="description" content="Website portofolio Ilzz, seorang Vibe Coder yang membangun produk digital, website, dan aplikasi lewat kolaborasi dengan AI.">
+
+  <!-- OpenGraph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ilzz — Vibe Coder | Portofolio">
+  <meta property="og:description" content="Website portofolio Ilzz, seorang Vibe Coder yang membangun produk digital lewat kolaborasi cerdas dengan AI.">
+  <meta property="og:image" content="foto-profil.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ilzz — Vibe Coder | Portofolio">
+  <meta name="twitter:description" content="Website portofolio Ilzz, seorang Vibe Coder yang membangun produk digital lewat kolaborasi cerdas dengan AI.">
+  <meta name="twitter:image" content="foto-profil.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" href="foto-profil.jpg">
+
+  <!-- Typography: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Pencegahan Flash of Unstyled Theme (FOUT) -->
+  <script>
+    (function () {
+      try {
+        var savedTheme = localStorage.getItem('ilzz_theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    /* -------------------------------------------------------------
+       SISTEM DESAIN & MOTION TOKENS (LIGHT & DARK MODE)
+       ------------------------------------------------------------- */
+    :root {
+      --blue-600: #2563EB;
+      --blue-800: #1E40AF;
+      --blue-50: #EFF6FF;
+      --ink: #0F172A;
+      --muted: #475569;
+      --bg: #FFFFFF;
+      --card-bg: #FFFFFF;
+      --line: #E2E8F0;
+      --nav-bg: rgba(255, 255, 255, 0.92);
+      --mobile-menu-bg: rgba(255, 255, 255, 0.98);
+      --badge-bg: #FFFFFF;
+      --badge-line: #E2E8F0;
+      --card-shadow: 0 4px 20px -4px rgba(37, 99, 235, 0.08);
+      --card-shadow-hover: 0 14px 32px -8px rgba(37, 99, 235, 0.16);
+
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --dur-fast: 180ms;
+      --dur-base: 400ms;
+      --dur-slow: 700ms;
+
+      --nav-height: 72px;
+      --max-width: 1040px;
+    }
+
+    :root[data-theme="dark"] {
+      --blue-600: #3B82F6;
+      --blue-800: #60A5FA;
+      --blue-50: #121B2F;
+      --ink: #F8FAFC;
+      --muted: #94A3B8;
+      --bg: #0A0F1D;
+      --card-bg: #111A2E;
+      --line: #1F2D48;
+      --nav-bg: rgba(10, 15, 29, 0.92);
+      --mobile-menu-bg: rgba(10, 15, 29, 0.98);
+      --badge-bg: #15223C;
+      --badge-line: #2A3B5F;
+      --card-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.45);
+      --card-shadow-hover: 0 14px 32px -8px rgba(2, 6, 23, 0.6);
+    }
+
+    /* Fallback sistem preferensi OS jika pengguna belum mengatur manual */
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --blue-600: #3B82F6;
+        --blue-800: #60A5FA;
+        --blue-50: #121B2F;
+        --ink: #F8FAFC;
+        --muted: #94A3B8;
+        --bg: #0A0F1D;
+        --card-bg: #111A2E;
+        --line: #1F2D48;
+        --nav-bg: rgba(10, 15, 29, 0.92);
+        --mobile-menu-bg: rgba(10, 15, 29, 0.98);
+        --badge-bg: #15223C;
+        --badge-line: #2A3B5F;
+        --card-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.45);
+        --card-shadow-hover: 0 14px 32px -8px rgba(2, 6, 23, 0.6);
+      }
+    }
+
+    /* Reset & Dasar */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Transisi Halus Pergantian Variabel Warna Dinamis di :root */
+    html, body {
+      transition: background-color 0.35s var(--ease),
+                  color 0.35s var(--ease);
+    }
+
+    html.theme-transitioning,
+    html.theme-transitioning *,
+    html.theme-transitioning *::before,
+    html.theme-transitioning *::after {
+      transition: background-color 0.35s var(--ease),
+                  border-color 0.35s var(--ease),
+                  color 0.35s var(--ease),
+                  box-shadow 0.35s var(--ease),
+                  stroke 0.35s var(--ease),
+                  fill 0.35s var(--ease) !important;
+      transition-delay: 0s !important;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Focus Ring Aksesibilitas */
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--blue-600);
+      outline-offset: 3px;
+    }
+
+    /* Typography & Utilities */
+    h1, h2, h3, h4 {
+      color: var(--ink);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      text-wrap: balance;
+    }
+
+    p {
+      color: var(--muted);
+      max-width: 65ch;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section {
+      padding: 64px 0;
+    }
+
+    @media (min-width: 768px) {
+      .section {
+        padding: 96px 0;
+      }
+    }
+
+    .section-alt {
+      background-color: var(--blue-50);
+    }
+
+    .section-header {
+      margin-bottom: 40px;
+    }
+
+    @media (min-width: 768px) {
+      .section-header {
+        margin-bottom: 56px;
+      }
+    }
+
+    .section-kicker {
+      display: inline-block;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--blue-600);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      margin-bottom: 12px;
+    }
+
+    .section-desc {
+      font-size: 1.0625rem;
+      color: var(--muted);
+    }
+
+    /* -------------------------------------------------------------
+       SCROLL PROGRESS BAR
+       ------------------------------------------------------------- */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: var(--blue-600);
+      transform-origin: 0 50%;
+      transform: scaleX(0);
+      z-index: 100;
+      pointer-events: none;
+      will-change: transform;
+    }
+
+    /* -------------------------------------------------------------
+       NAVBAR
+       ------------------------------------------------------------- */
+    .navbar {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--nav-height);
+      z-index: 90;
+      background-color: rgba(255, 255, 255, 0);
+      border-bottom: 1px solid transparent;
+      transition: background-color var(--dur-base) var(--ease),
+                  border-color var(--dur-base) var(--ease),
+                  backdrop-filter var(--dur-base) var(--ease);
+    }
+
+    .navbar.scrolled {
+      background-color: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom-color: var(--line);
+    }
+
+    .nav-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .nav-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 25%;
+      border: 2px solid var(--blue-600);
+      background-color: var(--blue-50);
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex;
+      }
+    }
+
+    .nav-link {
+      position: relative;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--muted);
+      padding: 8px 0;
+      transition: color var(--dur-fast) var(--ease);
+      white-space: nowrap;
+    }
+
+    .nav-link:hover {
+      color: var(--blue-800);
+    }
+
+    .nav-link.active {
+      color: var(--blue-600);
+      font-weight: 600;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--blue-600);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform var(--dur-fast) var(--ease);
+    }
+
+    .nav-link.active::after {
+      transform: scaleX(1);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    /* -------------------------------------------------------------
+       THEME TOGGLE BUTTON (DESKTOP & HEADER)
+       ------------------------------------------------------------- */
+    .theme-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background-color: var(--card-bg);
+      color: var(--ink);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: background-color var(--dur-fast) var(--ease),
+                  border-color var(--dur-fast) var(--ease),
+                  color var(--dur-fast) var(--ease),
+                  transform var(--dur-fast) var(--ease);
+      flex-shrink: 0;
+    }
+
+    .theme-toggle-btn:hover {
+      background-color: var(--blue-50);
+      border-color: var(--blue-600);
+      color: var(--blue-600);
+      transform: translateY(-1px);
+    }
+
+    .theme-toggle-btn:active {
+      transform: scale(0.95);
+    }
+
+    .theme-toggle-btn svg {
+      position: absolute;
+      transition: transform 0.4s var(--ease), opacity 0.3s var(--ease);
+    }
+
+    /* Light Mode: Moon tampil, Sun tersembunyi */
+    :root:not([data-theme="dark"]) .theme-toggle-btn .theme-icon-moon,
+    [data-theme="light"] .theme-toggle-btn .theme-icon-moon {
+      transform: rotate(0deg) scale(1);
+      opacity: 1;
+    }
+
+    :root:not([data-theme="dark"]) .theme-toggle-btn .theme-icon-sun,
+    [data-theme="light"] .theme-toggle-btn .theme-icon-sun {
+      transform: rotate(90deg) scale(0);
+      opacity: 0;
+    }
+
+    /* Dark Mode: Sun tampil, Moon tersembunyi */
+    [data-theme="dark"] .theme-toggle-btn .theme-icon-sun {
+      transform: rotate(0deg) scale(1);
+      opacity: 1;
+    }
+
+    [data-theme="dark"] .theme-toggle-btn .theme-icon-moon {
+      transform: rotate(-90deg) scale(0);
+      opacity: 0;
+    }
+
+    .nav-cta-btn {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      padding: 0 18px;
+      border-radius: 8px;
+      background-color: var(--blue-600);
+      color: #FFFFFF;
+      font-size: 0.875rem;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: background-color var(--dur-fast) var(--ease),
+                  transform var(--dur-fast) var(--ease);
+    }
+
+    .nav-cta-btn:hover {
+      background-color: var(--blue-800);
+    }
+
+    .nav-cta-btn:active {
+      transform: scale(0.97);
+    }
+
+    @media (min-width: 880px) {
+      .nav-cta-btn {
+        display: inline-flex;
+      }
+    }
+
+    /* Mobile Hamburger */
+    .nav-hamburger {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      color: var(--ink);
+      transition: background-color var(--dur-fast) var(--ease);
+    }
+
+    .nav-hamburger:hover {
+      background-color: var(--blue-50);
+    }
+
+    @media (min-width: 768px) {
+      .nav-hamburger {
+        display: none;
+      }
+    }
+
+    /* Mobile Drawer Menu */
+    .mobile-menu {
+      position: fixed;
+      top: var(--nav-height);
+      left: 0;
+      width: 100%;
+      background-color: var(--mobile-menu-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transform: translateY(-110%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform var(--dur-base) var(--ease),
+                  opacity var(--dur-fast) var(--ease);
+      z-index: 85;
+      box-shadow: 0 12px 24px -6px rgba(15, 23, 42, 0.08);
+    }
+
+    .mobile-theme-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border-radius: 8px;
+      background-color: var(--blue-50);
+      border: 1px solid var(--line);
+      margin-top: 4px;
+    }
+
+    .mobile-theme-label {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .mobile-theme-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 6px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color var(--dur-fast) var(--ease),
+                  border-color var(--dur-fast) var(--ease),
+                  color var(--dur-fast) var(--ease);
+    }
+
+    .mobile-theme-btn:hover {
+      border-color: var(--blue-600);
+      color: var(--blue-600);
+    }
+
+    .mobile-menu.open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-nav-link {
+      display: flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 12px;
+      font-size: 1.0625rem;
+      font-weight: 500;
+      color: var(--ink);
+      border-radius: 8px;
+      transition: background-color var(--dur-fast) var(--ease),
+                  color var(--dur-fast) var(--ease);
+    }
+
+    .mobile-nav-link:hover,
+    .mobile-nav-link:focus-visible {
+      background-color: var(--blue-50);
+      color: var(--blue-600);
+    }
+
+    .mobile-cta {
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      height: 48px;
+      background-color: var(--blue-600);
+      color: #FFFFFF;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9375rem;
+    }
+
+    .mobile-cta:hover {
+      background-color: var(--blue-800);
+    }
+
+    /* -------------------------------------------------------------
+       HERO SECTION
+       ------------------------------------------------------------- */
+    .hero {
+      padding-top: 32px;
+      padding-bottom: 72px;
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        padding-top: 56px;
+        padding-bottom: 96px;
+      }
+    }
+
+    .hero-grid {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      gap: 48px;
+    }
+
+    @media (min-width: 900px) {
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.25fr 0.95fr;
+        align-items: center;
+        gap: 64px;
+      }
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--blue-600);
+      margin-bottom: 16px;
+    }
+
+    .hero-headline {
+      font-size: clamp(2.25rem, 4.5vw, 3.625rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    .hero-dynamic-wrapper {
+      display: inline-block;
+      position: relative;
+      color: var(--blue-600);
+      font-weight: 700;
+      white-space: nowrap;
+      min-width: 140px;
+    }
+
+    .hero-dynamic-word {
+      display: inline-block;
+      transition: transform var(--dur-base) var(--ease),
+                  opacity var(--dur-base) var(--ease);
+      will-change: transform, opacity;
+    }
+
+    .hero-desc {
+      font-size: 1.125rem;
+      line-height: 1.65;
+      color: var(--muted);
+      margin-bottom: 32px;
+      max-width: 54ch;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+    }
+
+    @media (min-width: 500px) {
+      .hero-actions {
+        width: auto;
+      }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 24px;
+      border-radius: 8px;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      position: relative;
+      text-decoration: none;
+      transition: background-color var(--dur-fast) var(--ease),
+                  border-color var(--dur-fast) var(--ease),
+                  color var(--dur-fast) var(--ease),
+                  transform var(--dur-fast) var(--ease);
+      will-change: transform;
+    }
+
+    .btn:active {
+      transform: scale(0.97) !important;
+    }
+
+    .btn-primary {
+      background-color: var(--blue-600);
+      color: #FFFFFF;
+      border: 1px solid var(--blue-600);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--blue-800);
+      border-color: var(--blue-800);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--blue-600);
+      color: var(--blue-600);
+      background-color: var(--blue-50);
+    }
+
+    /* -------------------------------------------------------------
+       FOTO PROFIL HERO (SESUAI SPESIFIKASI KETAT)
+       ------------------------------------------------------------- */
+    .hero-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 100%;
+    }
+
+    .hero-photo-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Lingkaran latar --blue-50 yang sedikit lebih besar di belakang foto */
+    .hero-photo-backdrop {
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background-color: var(--blue-50);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    @media (min-width: 900px) {
+      .hero-photo-backdrop {
+        width: 330px;
+        height: 330px;
+      }
+    }
+
+    /* Foto profil container */
+    .hero-photo-container {
+      position: relative;
+      z-index: 2;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      cursor: pointer;
+      transform-origin: center center;
+      will-change: transform;
+      animation: floatSubtle 6s ease-in-out infinite;
+    }
+
+    @media (min-width: 900px) {
+      .hero-photo-container {
+        width: 280px;
+        height: 280px;
+      }
+    }
+
+    /* Foto profil img:
+       Lingkaran (border-radius 50%), object-fit: cover, object-position: center 25%
+       Ring biru 3px (--blue-600) dengan jarak 4px putih di antara foto dan ring */
+    .hero-photo-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 25%;
+      display: block;
+      box-shadow: 0 0 0 4px var(--bg), 0 0 0 7px var(--blue-600);
+      transition: transform var(--dur-base) var(--ease),
+                  box-shadow var(--dur-base) var(--ease);
+      will-change: transform, box-shadow;
+    }
+
+    .hero-photo-container:hover .hero-photo-img {
+      transform: scale(1.03);
+      box-shadow: 0 0 0 4px var(--bg), 0 0 0 7px var(--blue-800);
+    }
+
+    /* Animasi float halus naik-turun 6px siklus 6s */
+    @keyframes floatSubtle {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    /* -------------------------------------------------------------
+       ORBIT RING LOGO AI BERPUTAR (CLAUDE, CHATGPT, GEMINI, GROK)
+       ------------------------------------------------------------- */
+    .hero-orbit-track {
+      position: absolute;
+      width: 236px;
+      height: 236px;
+      border-radius: 50%;
+      border: 1.5px dashed rgba(37, 99, 235, 0.35);
+      z-index: 3;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0.65);
+      transition: opacity 0.7s var(--ease),
+                  transform 0.7s var(--ease);
+      will-change: transform, opacity;
+    }
+
+    .hero-orbit-track.loaded {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .hero-orbit-track.is-spinning {
+      animation: orbitRotate 22s linear infinite;
+    }
+
+    @media (min-width: 900px) {
+      .hero-orbit-track {
+        width: 340px;
+        height: 340px;
+      }
+    }
+
+    /* Pause orbit saat hover wrapper foto profil */
+    .hero-photo-wrapper:hover .hero-orbit-track,
+    .hero-photo-wrapper:hover .orbit-ai-badge {
+      animation-play-state: paused;
+    }
+
+    /* 4 Node Posisi di Keliling Lingkaran */
+    .orbit-item {
+      position: absolute;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: auto;
+    }
+
+    @media (min-width: 900px) {
+      .orbit-item {
+        width: 42px;
+        height: 42px;
+      }
+    }
+
+    .orbit-item-top {
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .orbit-item-right {
+      top: 50%;
+      right: 0;
+      transform: translate(50%, -50%);
+    }
+
+    .orbit-item-bottom {
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 50%);
+    }
+
+    .orbit-item-left {
+      top: 50%;
+      left: 0;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Badge Node Logo AI dengan Animasi Muncul Pertama (Pop-in) & Counter-Rotation */
+    .orbit-ai-badge {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background-color: var(--badge-bg);
+      border: 1.5px solid var(--badge-line);
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(0);
+      will-change: transform, opacity;
+      transition: opacity 0.5s var(--ease),
+                  transform 0.5s var(--ease),
+                  border-color var(--dur-fast) var(--ease),
+                  box-shadow var(--dur-fast) var(--ease);
+    }
+
+    .orbit-ai-badge.pop-in {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .hero-orbit-track.is-spinning .orbit-ai-badge.pop-in {
+      animation: orbitCounterRotate 22s linear infinite;
+    }
+
+    .orbit-ai-badge:hover {
+      border-color: var(--blue-600);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.28);
+      transform: scale(1.18) !important;
+    }
+
+    .orbit-ai-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 50%;
+      user-select: none;
+    }
+
+    .orbit-ai-img.chatgpt-img {
+      padding: 4px;
+      object-fit: contain;
+      background-color: #FFFFFF;
+    }
+
+    .orbit-ai-img.grok-img {
+      background-color: #000000;
+      object-fit: cover;
+    }
+
+    .orbit-ai-svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+
+    @media (min-width: 900px) {
+      .orbit-ai-svg {
+        width: 22px;
+        height: 22px;
+      }
+    }
+
+    /* Keyframes Rotasi Orbit & Counter-Rotasi */
+    @keyframes orbitRotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes orbitCounterRotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(-360deg);
+      }
+    }
+
+    /* -------------------------------------------------------------
+       ANIMASI PAGE LOAD STAGGER
+       ------------------------------------------------------------- */
+    .stagger-load {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity var(--dur-slow) var(--ease),
+                  transform var(--dur-slow) var(--ease);
+      will-change: opacity, transform;
+    }
+
+    .stagger-load.loaded {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero-photo-container.stagger-load {
+      transform: scale(0.94);
+    }
+
+    .hero-photo-container.stagger-load.loaded {
+      transform: scale(1);
+    }
+
+    /* -------------------------------------------------------------
+       SCROLL REVEAL VIA INTERSECTION OBSERVER
+       ------------------------------------------------------------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity var(--dur-slow) var(--ease),
+                  transform var(--dur-slow) var(--ease);
+      will-change: opacity, transform;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* -------------------------------------------------------------
+       SECTION TENTANG
+       ------------------------------------------------------------- */
+    .about-text {
+      font-size: 1.1875rem;
+      line-height: 1.7;
+      color: var(--ink);
+      margin-bottom: 48px;
+      max-width: 72ch;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 640px) {
+      .about-stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px;
+      }
+    }
+
+    .stat-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 28px 24px;
+      text-align: left;
+      transition: border-color var(--dur-fast) var(--ease),
+                  transform var(--dur-fast) var(--ease),
+                  background-color var(--dur-fast) var(--ease);
+    }
+
+    .stat-number-wrapper {
+      display: flex;
+      align-items: baseline;
+      font-size: clamp(2rem, 3.5vw, 2.75rem);
+      font-weight: 700;
+      color: var(--blue-600);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 0.9375rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* -------------------------------------------------------------
+       SECTION SKILL & TOOLS
+       ------------------------------------------------------------- */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .skill-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--ink);
+      user-select: none;
+      transition: background-color var(--dur-fast) var(--ease),
+                  border-color var(--dur-fast) var(--ease),
+                  color var(--dur-fast) var(--ease),
+                  transform var(--dur-fast) var(--ease);
+      will-change: background-color, border-color, transform;
+    }
+
+    .skill-chip:hover {
+      background-color: var(--blue-50);
+      border-color: var(--blue-600);
+      color: var(--blue-800);
+      transform: translateY(-2px);
+    }
+
+    .skill-chip svg {
+      width: 16px;
+      height: 16px;
+      color: var(--blue-600);
+      flex-shrink: 0;
+    }
+
+    /* -------------------------------------------------------------
+       SECTION PROYEK
+       ------------------------------------------------------------- */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .filter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border-radius: 8px;
+      background-color: transparent;
+      border: 1px solid var(--line);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      transition: background-color var(--dur-fast) var(--ease),
+                  border-color var(--dur-fast) var(--ease),
+                  color var(--dur-fast) var(--ease),
+                  transform var(--dur-fast) var(--ease);
+      user-select: none;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--blue-600);
+      color: var(--blue-600);
+      background-color: var(--blue-50);
+    }
+
+    .filter-btn.active {
+      background-color: var(--blue-600);
+      border-color: var(--blue-600);
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+
+    .filter-btn:active {
+      transform: scale(0.97);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 640px) {
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .project-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 280px;
+      position: relative;
+      box-shadow: var(--card-shadow);
+      transition: transform var(--dur-base) var(--ease),
+                  border-color var(--dur-fast) var(--ease),
+                  box-shadow var(--dur-base) var(--ease),
+                  background-color var(--dur-base) var(--ease),
+                  opacity var(--dur-base) var(--ease);
+      will-change: transform, opacity;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      overflow: hidden;
+    }
+
+    .project-card.featured {
+      border-color: rgba(37, 99, 235, 0.35);
+      box-shadow: var(--card-shadow);
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      background: linear-gradient(145deg, rgba(37, 99, 235, 0.04), transparent 50%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--dur-base) var(--ease);
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-card:hover {
+      border-color: var(--blue-600);
+      transform: translateY(-5px);
+      box-shadow: 0 14px 32px -8px rgba(37, 99, 235, 0.12);
+    }
+
+    .project-card.is-filtering-out {
+      opacity: 0;
+      transform: scale(0.96) translateY(8px);
+      pointer-events: none;
+    }
+
+    .project-card.hidden {
+      display: none !important;
+    }
+
+    .project-card-top {
+      margin-bottom: 20px;
+    }
+
+    .project-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .project-tags-unboxed {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--blue-600);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      flex-wrap: wrap;
+    }
+
+    .project-tag-separator {
+      color: var(--line);
+    }
+
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #15803D;
+      background-color: #F0FDF4;
+      border: 1px solid #BBF7D0;
+      padding: 3px 9px;
+      border-radius: 9999px;
+      white-space: nowrap;
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #22C55E;
+      box-shadow: 0 0 6px #22C55E;
+      animation: livePulse 2s ease-in-out infinite;
+    }
+
+    @keyframes livePulse {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.35;
+        transform: scale(0.8);
+      }
+    }
+
+    .project-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .project-desc {
+      font-size: 0.9375rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .project-features-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    .feature-pill {
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background-color: var(--blue-50);
+      color: var(--blue-800);
+      border: 1px solid rgba(37, 99, 235, 0.15);
+      transition: transform var(--dur-fast) var(--ease),
+                  background-color var(--dur-fast) var(--ease),
+                  border-color var(--dur-fast) var(--ease),
+                  box-shadow var(--dur-fast) var(--ease);
+      user-select: none;
+    }
+
+    .feature-pill:hover {
+      transform: translateY(-1px);
+      background-color: #DBEAFE;
+      border-color: var(--blue-600);
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.12);
+    }
+
+    .project-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: auto;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      flex-wrap: wrap;
+    }
+
+    .project-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 38px;
+      padding: 0 14px;
+      border-radius: 8px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color var(--dur-fast) var(--ease),
+                  border-color var(--dur-fast) var(--ease),
+                  color var(--dur-fast) var(--ease),
+                  transform var(--dur-fast) var(--ease),
+                  box-shadow var(--dur-fast) var(--ease);
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .project-btn svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    .project-btn:active {
+      transform: scale(0.97);
+    }
+
+    .project-btn-demo {
+      background-color: var(--blue-50);
+      color: var(--blue-600);
+      border: 1px solid rgba(37, 99, 235, 0.2);
+    }
+
+    .project-btn-demo:hover {
+      background-color: var(--blue-600);
+      color: #FFFFFF;
+      border-color: var(--blue-600);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    }
+
+    .project-btn-code {
+      background-color: var(--card-bg);
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    .project-btn-code:hover {
+      background-color: var(--blue-50);
+      color: var(--blue-800);
+      border-color: var(--blue-600);
+    }
+
+    .project-btn-disabled {
+      background-color: transparent;
+      color: var(--muted);
+      border: 1px dashed var(--line);
+      cursor: default;
+      opacity: 0.85;
+    }
+
+    .project-btn-disabled:active {
+      transform: none;
+    }
+
+    /* -------------------------------------------------------------
+       SECTION CARA KERJA
+       ------------------------------------------------------------- */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .steps-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px;
+      }
+    }
+
+    .step-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .step-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--blue-600);
+      margin-bottom: 16px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .step-title {
+      font-size: 1.1875rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .step-desc {
+      font-size: 0.9375rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* -------------------------------------------------------------
+       SECTION KONTAK (CTA PENUTUP)
+       ------------------------------------------------------------- */
+    .contact-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 40px 24px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .contact-card {
+        padding: 64px 40px;
+      }
+    }
+
+    .contact-heading {
+      font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+      max-width: 24ch;
+    }
+
+    .contact-number-display {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      width: 100%;
+    }
+
+    @media (min-width: 500px) {
+      .contact-actions {
+        width: auto;
+      }
+    }
+
+    .btn-wa-large {
+      background-color: var(--blue-600);
+      color: #FFFFFF;
+      min-height: 52px;
+      padding: 0 32px;
+      font-size: 1.0625rem;
+      border: 1px solid var(--blue-600);
+    }
+
+    .btn-wa-large:hover {
+      background-color: var(--blue-800);
+      border-color: var(--blue-800);
+    }
+
+    .btn-copy-number {
+      min-height: 52px;
+      padding: 0 24px;
+      font-size: 0.9375rem;
+      background-color: var(--card-bg);
+      border: 1px solid var(--line);
+      color: var(--ink);
+    }
+
+    .btn-copy-number:hover {
+      border-color: var(--blue-600);
+      color: var(--blue-600);
+      background-color: var(--blue-50);
+    }
+
+    /* -------------------------------------------------------------
+       FOOTER
+       ------------------------------------------------------------- */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 48px 0;
+      margin-top: auto;
+      background-color: var(--bg);
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      text-align: center;
+    }
+
+    @media (min-width: 768px) {
+      .footer-inner {
+        flex-direction: row;
+        text-align: left;
+      }
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 25%;
+      border: 2px solid var(--blue-600);
+      background-color: var(--blue-50);
+      display: block;
+    }
+
+    .footer-copy {
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      list-style: none;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer-link {
+      font-size: 0.875rem;
+      color: var(--muted);
+      transition: color var(--dur-fast) var(--ease);
+    }
+
+    .footer-link:hover {
+      color: var(--blue-800);
+    }
+
+    /* -------------------------------------------------------------
+       TOAST NOTIFIKASI
+       ------------------------------------------------------------- */
+    #copy-toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background-color: var(--ink);
+      color: var(--bg);
+      border: 1px solid var(--line);
+      padding: 12px 24px;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform var(--dur-fast) var(--ease),
+                  opacity var(--dur-fast) var(--ease),
+                  background-color var(--dur-fast) var(--ease),
+                  color var(--dur-fast) var(--ease);
+      z-index: 120;
+    }
+
+    #copy-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* -------------------------------------------------------------
+       KEMBALI KE ATAS (BACK TO TOP)
+       ------------------------------------------------------------- */
+    #back-to-top {
+      position: fixed;
+      bottom: 28px;
+      right: 24px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: var(--card-bg);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: opacity var(--dur-fast) var(--ease),
+                  transform var(--dur-fast) var(--ease),
+                  border-color var(--dur-fast) var(--ease),
+                  background-color var(--dur-fast) var(--ease),
+                  color var(--dur-fast) var(--ease);
+      z-index: 80;
+    }
+
+    #back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    #back-to-top:hover {
+      border-color: var(--blue-600);
+      color: var(--blue-600);
+      background-color: var(--blue-50);
+    }
+
+    #back-to-top:active {
+      transform: scale(0.95);
+    }
+
+    /* -------------------------------------------------------------
+       LIGHTBOX FOTO PROFIL
+       ------------------------------------------------------------- */
+    .lightbox-backdrop {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 150;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--dur-base) var(--ease);
+      padding: 24px;
+    }
+
+    .lightbox-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox-container {
+      position: relative;
+      max-width: 480px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform: scale(0.92);
+      transition: transform var(--dur-base) var(--ease);
+    }
+
+    .lightbox-backdrop.open .lightbox-container {
+      transform: scale(1);
+    }
+
+    .lightbox-img {
+      width: 100%;
+      max-width: 420px;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 25%;
+      border: 4px solid var(--card-bg);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+      background-color: var(--blue-50);
+      transition: border-color var(--dur-fast) var(--ease);
+    }
+
+    .lightbox-caption {
+      margin-top: 16px;
+      color: #FFFFFF;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .lightbox-close-btn {
+      position: absolute;
+      top: -16px;
+      right: -8px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: var(--card-bg);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color var(--dur-fast) var(--ease),
+                  border-color var(--dur-fast) var(--ease),
+                  transform var(--dur-fast) var(--ease);
+    }
+
+    .lightbox-close-btn:hover {
+      background-color: var(--blue-50);
+      border-color: var(--blue-600);
+      color: var(--blue-600);
+      transform: scale(1.05);
+    }
+
+    /* -------------------------------------------------------------
+       PENYESUAIAN DARK MODE KHUSUS (ACCENTS & SURFACES)
+       ------------------------------------------------------------- */
+    [data-theme="dark"] .live-badge {
+      background-color: rgba(34, 197, 94, 0.15);
+      border-color: rgba(34, 197, 94, 0.3);
+      color: #4ADE80;
+    }
+
+    [data-theme="dark"] .project-card::before {
+      background: linear-gradient(145deg, rgba(59, 130, 246, 0.08), transparent 50%);
+    }
+
+    [data-theme="dark"] .project-card:hover {
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    [data-theme="dark"] .hero-photo-wrapper .hero-photo-container img {
+      box-shadow: 0 0 0 4px var(--bg), 0 0 0 7px var(--blue-600);
+    }
+
+    [data-theme="dark"] .hero-photo-wrapper .hero-photo-container:hover img {
+      box-shadow: 0 0 0 4px var(--bg), 0 0 0 7px var(--blue-800);
+    }
+
+    /* -------------------------------------------------------------
+       PREFERS-REDUCED-MOTION (WAJIB MEMATIKAN SEMUA ANIMASI NON-ESENSIAL)
+       ------------------------------------------------------------- */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      .hero-photo-container {
+        animation: none !important;
+      }
+
+      .hero-orbit-track,
+      .orbit-ai-badge {
+        animation: none !important;
+      }
+
+      .stagger-load {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      #scroll-progress {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll Progress Bar Tipis (3px, biru) di paling atas halaman -->
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- 1. NAVBAR STICKY TIPIS -->
+  <header class="navbar" id="main-navbar">
+    <div class="container nav-inner">
+      <!-- Foto Profil Kecil + Logo Teks "ilzz" di kiri -->
+      <a href="#hero" class="nav-brand" aria-label="Beranda Ilzz">
+        <!-- LETAKKAN foto-profil.jpg di folder yang sama dengan index.html -->
+        <img src="foto-profil.jpg" alt="Foto profil Ilzz" width="736" height="736" class="nav-avatar">
+        <span>ilzz</span>
+      </a>
+
+      <!-- Tautan Anchor di kanan (Desktop) -->
+      <nav aria-label="Navigasi Utama">
+        <ul class="nav-links">
+          <li><a href="#tentang" class="nav-link">Tentang</a></li>
+          <li><a href="#skill" class="nav-link">Skill</a></li>
+          <li><a href="#proyek" class="nav-link">Proyek</a></li>
+          <li><a href="#cara-kerja" class="nav-link">Cara Kerja</a></li>
+          <li><a href="#kontak" class="nav-link">Kontak</a></li>
+        </ul>
+      </nav>
+
+      <!-- Aksi Navigasi (Theme Toggle, CTA & Mobile Hamburger) -->
+      <div class="nav-actions">
+        <!-- Tombol Toggle Dark Mode (Desktop & Header) -->
+        <button type="button" 
+                class="theme-toggle-btn" 
+                id="theme-toggle-btn" 
+                aria-label="Ganti ke mode gelap" 
+                title="Ganti tema (Terang / Gelap)">
+          <!-- Ikon Matahari (muncul saat Dark Mode) -->
+          <svg class="theme-icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <!-- Ikon Bulan (muncul saat Light Mode) -->
+          <svg class="theme-icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <!-- Tombol CTA Navigasi -->
+        <a href="https://wa.me/62895403019991?text=Halo%20Ilzz%2C%20saya%20tertarik%20berdiskusi%20soal%20proyek" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="nav-cta-btn">
+          Konsultasi Proyek
+        </a>
+
+        <!-- Tombol Hamburger Mobile -->
+        <button type="button" 
+                class="nav-hamburger" 
+                id="hamburger-btn" 
+                aria-label="Buka menu navigasi" 
+                aria-expanded="false" 
+                aria-controls="mobile-menu">
+          <svg id="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="12" x2="20" y2="12"></line>
+            <line x1="4" y1="6" x2="20" y2="6"></line>
+            <line x1="4" y1="18" x2="20" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Panel Menu Mobile Drawer -->
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#tentang" class="mobile-nav-link">Tentang</a>
+      <a href="#skill" class="mobile-nav-link">Skill & Tools</a>
+      <a href="#proyek" class="mobile-nav-link">Proyek</a>
+      <a href="#cara-kerja" class="mobile-nav-link">Cara Kerja</a>
+      <a href="#kontak" class="mobile-nav-link">Kontak</a>
+
+      <!-- Switcher Tema di Mobile Drawer -->
+      <div class="mobile-theme-row">
+        <span class="mobile-theme-label">Mode Tampilan</span>
+        <button type="button" class="mobile-theme-btn" id="mobile-theme-btn" aria-label="Ganti mode tema">
+          <span id="mobile-theme-text">Mode Gelap</span>
+          <svg id="mobile-theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+
+      <a href="https://wa.me/62895403019991?text=Halo%20Ilzz%2C%20saya%20tertarik%20berdiskusi%20soal%20proyek" 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="mobile-cta">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        Hubungi via WhatsApp
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 2. HERO SECTION (DUA KOLOM DI DESKTOP) -->
+    <section id="hero" class="section hero">
+      <div class="container hero-grid">
+        <!-- Kolom Kiri: Teks & Aksi -->
+        <div class="hero-content">
+          <span class="hero-badge stagger-load" data-stagger="0">Vibe Coder</span>
+          
+          <h1 class="hero-headline stagger-load" data-stagger="1">
+            Ide jadi <span class="hero-dynamic-wrapper"><span id="dynamic-word" class="hero-dynamic-word">produk</span></span>, dibangun bareng AI.
+          </h1>
+
+          <p class="hero-desc stagger-load" data-stagger="2">
+            Menerjemahkan ide dan visi kreatif menjadi aplikasi web berkinerja tinggi lewat sinergi kecerdasan buatan, prompt engineering terarah, dan kode berkualitas.
+          </p>
+
+          <div class="hero-actions stagger-load" data-stagger="3">
+            <!-- Tombol Utama (Biru Solid + Magnetic Interaction) -->
+            <a href="https://wa.me/62895403019991?text=Halo%20Ilzz%2C%20saya%20tertarik%20berdiskusi%20soal%20proyek" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="btn btn-primary magnetic-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+              Hubungi via WhatsApp
+            </a>
+
+            <!-- Tombol Kedua (Outline) -->
+            <a href="#proyek" class="btn btn-outline">
+              Lihat Proyek
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Kolom Kanan: Foto Profil Hero Sesuai Spesifikasi + Ring Orbit AI Memutar -->
+        <div class="hero-visual">
+          <div class="hero-photo-wrapper">
+            <!-- Lingkaran latar --blue-50 yang sedikit lebih besar -->
+            <div class="hero-photo-backdrop" aria-hidden="true"></div>
+
+            <!-- Orbit Ring Berputar dengan Logo AI (Claude, ChatGPT, Gemini, Grok) -->
+            <div class="hero-orbit-track" id="hero-orbit-track" aria-label="Logo AI yang berputar: Claude, ChatGPT, Gemini, dan Grok">
+              <!-- Logo 1: Claude (Top) -->
+              <div class="orbit-item orbit-item-top">
+                <div class="orbit-ai-badge" title="Claude / Anthropic AI" tabindex="0" role="img" aria-label="Claude AI">
+                  <img src="logo-claude.png" alt="Claude AI Logo" width="42" height="42" class="orbit-ai-img" loading="eager" decoding="async">
+                </div>
+              </div>
+
+              <!-- Logo 2: ChatGPT (Right) -->
+              <div class="orbit-item orbit-item-right">
+                <div class="orbit-ai-badge" title="ChatGPT / OpenAI" tabindex="0" role="img" aria-label="ChatGPT OpenAI">
+                  <img src="logo-chatgpt.jpg" alt="ChatGPT Logo" width="42" height="42" class="orbit-ai-img chatgpt-img" loading="eager" decoding="async">
+                </div>
+              </div>
+
+              <!-- Logo 3: Gemini (Bottom) -->
+              <div class="orbit-item orbit-item-bottom">
+                <div class="orbit-ai-badge" title="Google Gemini AI" tabindex="0" role="img" aria-label="Google Gemini">
+                  <svg viewBox="0 0 24 24" class="orbit-ai-svg" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="gemini-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#1A73E8"/>
+                        <stop offset="45%" stop-color="#8AB4F8"/>
+                        <stop offset="100%" stop-color="#C58AF9"/>
+                      </linearGradient>
+                    </defs>
+                    <path fill="url(#gemini-grad)" d="M12 2C12 7.52 7.52 12 2 12C7.52 12 12 16.48 12 22C12 16.48 16.48 12 22 12C16.48 12 12 7.52 12 2Z"/>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Logo 4: Grok (Left) -->
+              <div class="orbit-item orbit-item-left">
+                <div class="orbit-ai-badge" title="Grok / xAI" tabindex="0" role="img" aria-label="Grok xAI">
+                  <img src="logo-grok.png" alt="Grok xAI Logo" width="42" height="42" class="orbit-ai-img grok-img" loading="eager" decoding="async">
+                </div>
+              </div>
+            </div>
+
+            <!-- Foto profil container dengan stagger & hover -->
+            <div class="hero-photo-container stagger-load" 
+                 data-stagger="4" 
+                 id="hero-photo-box" 
+                 tabindex="0" 
+                 role="button" 
+                 aria-label="Lihat pratinjau foto profil Ilzz berukuran penuh">
+              <!-- LETAKKAN foto-profil.jpg di folder yang sama dengan index.html -->
+              <img src="foto-profil.jpg" 
+                   alt="Foto profil Ilzz" 
+                   width="736" 
+                   height="736" 
+                   fetchpriority="high" 
+                   decoding="async" 
+                   class="hero-photo-img">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. TENTANG SECTION -->
+    <section id="tentang" class="section section-alt">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-kicker">Tentang</span>
+          <h2 class="section-title">Pendekatan Vibe Coding</h2>
+          <p class="section-desc">Kecepatan tanpa mengorbankan kualitas, iterasi cepat, dan fokus pada dampak nyata.</p>
+        </div>
+
+        <p class="about-text reveal">
+          Sebagai Vibe Coder, saya tidak menghabiskan berminggu-minggu hanya untuk boilerplate. Menggabungkan model AI tercanggih dengan naluri desain yang tajam, setiap konsep dirancang, diuji, dan diluncurkan dalam waktu singkat dengan arsitektur yang tetap bersih dan terukur.
+        </p>
+
+        <!-- 3 Angka Ringkas yang Menghitung Naik -->
+        <div class="about-stats">
+          <div class="stat-card reveal">
+            <!-- GANTI: Jumlah proyek yang diselesaikan -->
+            <div class="stat-number-wrapper">
+              <span class="counter-number" data-target="24">0</span>
+              <span>+</span>
+            </div>
+            <div class="stat-label">Proyek Selesai <!-- GANTI --></div>
+          </div>
+
+          <div class="stat-card reveal">
+            <!-- GANTI: Jumlah tools & framework AI yang dikuasai -->
+            <div class="stat-number-wrapper">
+              <span class="counter-number" data-target="15">0</span>
+              <span>+</span>
+            </div>
+            <div class="stat-label">AI Tools & Tech Stack <!-- GANTI --></div>
+          </div>
+
+          <div class="stat-card reveal">
+            <!-- GANTI: Tahun pengalaman atau jam eksplorasi vibe coding -->
+            <div class="stat-number-wrapper">
+              <span class="counter-number" data-target="3">0</span>
+              <span>+</span>
+            </div>
+            <div class="stat-label">Tahun Eksplorasi Digital <!-- GANTI --></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. SKILL & TOOLS SECTION -->
+    <section id="skill" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-kicker">Kemampuan</span>
+          <h2 class="section-title">Skill & AI Toolkit</h2>
+          <p class="section-desc">Kombinasi teknologi modern dan ekosistem AI generasi terbaru.</p>
+        </div>
+
+        <!-- Grid Chip Sederhana: hover ganti bg ke --blue-50 dan border ke biru -->
+        <div class="skills-grid reveal">
+          <!-- GANTI: Sesuaikan daftar skill dan tools Anda -->
+          <div class="skill-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            Prompt Engineering <!-- GANTI -->
+          </div>
+          <div class="skill-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+            Web Development <!-- GANTI -->
+          </div>
+          <div class="skill-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+            UI/UX & Prototyping <!-- GANTI -->
+          </div>
+          <div class="skill-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            Cursor IDE <!-- GANTI -->
+          </div>
+          <div class="skill-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+            Claude 3.7 Sonnet <!-- GANTI -->
+          </div>
+          <div class="skill-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            Bolt.new <!-- GANTI -->
+          </div>
+          <div class="skill-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            Lovable <!-- GANTI -->
+          </div>
+          <div class="skill-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
+            TypeScript & Tailwind <!-- GANTI -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. PROYEK SECTION -->
+    <section id="proyek" class="section section-alt">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-kicker">Portofolio & Bot Unggulan</span>
+          <h2 class="section-title">Karya Pilihan</h2>
+          <p class="section-desc">Koleksi WhatsApp Bot bertenaga AI, aplikasi web, dan alat digital yang diwujudkan melalui alur kerja vibe coding.</p>
+        </div>
+
+        <!-- Filter Bar Interaktif Berbasis Tag: Semua, WhatsApp Bot, AI Tools, Web Development, UI/UX -->
+        <div class="filter-bar reveal" role="tablist" aria-label="Filter kategori proyek">
+          <button type="button" class="filter-btn active" data-filter="all" role="tab" aria-selected="true">
+            Semua
+          </button>
+          <button type="button" class="filter-btn" data-filter="wa-bot" role="tab" aria-selected="false">
+            WhatsApp Bot
+          </button>
+          <button type="button" class="filter-btn" data-filter="ai-tools" role="tab" aria-selected="false">
+            AI Tools
+          </button>
+          <button type="button" class="filter-btn" data-filter="web-dev" role="tab" aria-selected="false">
+            Web Development
+          </button>
+          <button type="button" class="filter-btn" data-filter="ui-ux" role="tab" aria-selected="false">
+            UI/UX
+          </button>
+        </div>
+
+        <!-- Grid 6 Kartu Proyek dengan Tag, Live Indicator, Feature Pills, Demo, dan Kode Sumber -->
+        <div class="projects-grid" id="projects-grid">
+          <!-- PROYEK 1: anasagi md (WhatsApp Bot Unggulan) -->
+          <article class="project-card featured reveal" data-tags="wa-bot ai-tools">
+            <div class="project-card-top">
+              <div class="project-meta-row">
+                <div class="project-tags-unboxed">
+                  <span>WhatsApp Bot</span>
+                  <span class="project-tag-separator" aria-hidden="true">·</span>
+                  <span>AI Tools</span>
+                </div>
+                <div class="live-badge" title="Bot aktif dan siap digunakan">
+                  <span class="live-dot" aria-hidden="true"></span>
+                  <span>Aktif & Teruji</span>
+                </div>
+              </div>
+              <h3 class="project-title">anasagi md</h3>
+              <p class="project-desc">WhatsApp bot multifungsi yang dikembangkan dari integrasi ide kreatif dan model AI. Menghadirkan beragam fitur seru seperti games interaktif, automasi tools harian, dan utilitas cerdas.</p>
+              
+              <!-- Micro-Features Pills -->
+              <div class="project-features-list">
+                <span class="feature-pill">🎮 Games & Kuis Seru</span>
+                <span class="feature-pill">🛠️ Tools & Utility</span>
+                <span class="feature-pill">🤖 AI Conversational</span>
+                <span class="feature-pill">⚡ Respon Cepat</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <!-- Tautan Kontak WhatsApp Resmi untuk Info & Demo anasagi md (Aman & Terenkripsi) -->
+              <a href="https://wa.me/62895403019991?text=Halo%20Ilzz%2C%20saya%20tertarik%20dengan%20WhatsApp%20Bot%20anasagi%20md%20(info%20fitur%20%26%20demo)" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="project-btn project-btn-demo" 
+                 aria-label="Info dan Demo WhatsApp anasagi md">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span>Info & Demo WA</span>
+              </a>
+              <!-- GANTI: Tautan Kode Sumber anasagi md (Aman: Jangan unggah file session ke GitHub publik!) -->
+              <a href="https://github.com" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="project-btn project-btn-code" 
+                 aria-label="Kode Sumber anasagi md">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                <span>Kode Sumber <!-- GANTI --></span>
+              </a>
+            </div>
+          </article>
+
+          <!-- PROYEK 2: Shinobu Ai (WhatsApp Bot Penjaga Grup) -->
+          <article class="project-card featured reveal" data-tags="wa-bot ai-tools">
+            <div class="project-card-top">
+              <div class="project-meta-row">
+                <div class="project-tags-unboxed">
+                  <span>WhatsApp Bot</span>
+                  <span class="project-tag-separator" aria-hidden="true">·</span>
+                  <span>Proteksi Grup</span>
+                </div>
+                <div class="live-badge" title="Bot pelindung grup aktif">
+                  <span class="live-dot" aria-hidden="true"></span>
+                  <span>Proteksi Aktif</span>
+                </div>
+              </div>
+              <h3 class="project-title">Shinobu Ai</h3>
+              <p class="project-desc">WhatsApp bot cerdas yang didedikasikan untuk menjaga dan memoderasi grup. Memiliki sistem proteksi anti-spam, deteksi tautan berbahaya, manajemen anggota otomatis, dan asisten keamanan AI.</p>
+              
+              <!-- Micro-Features Pills -->
+              <div class="project-features-list">
+                <span class="feature-pill">🛡️ Penjaga Grup Otomatis</span>
+                <span class="feature-pill">🚫 Anti-Spam & Link Guard</span>
+                <span class="feature-pill">👥 Manajemen Member</span>
+                <span class="feature-pill">🧠 AI Moderasi</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <!-- Tautan WhatsApp untuk Pasang Shinobu Ai di Grup (Aman & Langsung) -->
+              <a href="https://wa.me/62895403019991?text=Halo%20Ilzz%2C%20saya%20ingin%20menggunakan%20Shinobu%20Ai%20untuk%20menjaga%20grup%20WhatsApp" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="project-btn project-btn-demo" 
+                 aria-label="Pasang Shinobu Ai di Grup WhatsApp">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>Pasang di Grup (WA)</span>
+              </a>
+              <!-- GANTI: Tautan Kode Sumber Shinobu Ai (Aman: Simpan kredensial bot di env lokal) -->
+              <a href="https://github.com" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="project-btn project-btn-code" 
+                 aria-label="Kode Sumber Shinobu Ai">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                <span>Kode Sumber <!-- GANTI --></span>
+              </a>
+            </div>
+          </article>
+
+          <!-- PROYEK 3: SaaS Dashboard AI -->
+          <article class="project-card reveal" data-tags="web-dev ai-tools">
+            <div class="project-card-top">
+              <div class="project-meta-row">
+                <div class="project-tags-unboxed">
+                  <span>Web Development</span>
+                  <span class="project-tag-separator" aria-hidden="true">·</span>
+                  <span>AI Tools</span>
+                </div>
+              </div>
+              <h3 class="project-title">[SaaS AI Analytics Hub] <!-- GANTI --></h3>
+              <p class="project-desc">Platform analitik prediktif real-time dengan integrasi LLM dan visualisasi data otomatis untuk pengambilan keputusan bisnis cepat. <!-- GANTI --></p>
+              
+              <div class="project-features-list">
+                <span class="feature-pill">📊 Real-Time Analytics</span>
+                <span class="feature-pill">⚡ Next.js & Tailwind</span>
+                <span class="feature-pill">🔒 Zero-Leak Auth</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <a href="https://wa.me/62895403019991?text=Halo%20Ilzz%2C%20saya%20ingin%20melihat%20demo%20[SaaS%20AI%20Analytics%20Hub]" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="project-btn project-btn-demo" 
+                 aria-label="Demo Langsung SaaS AI Analytics Hub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                <span>Demo Langsung <!-- GANTI --></span>
+              </a>
+              <a href="https://github.com" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="project-btn project-btn-code" 
+                 aria-label="Kode Sumber SaaS AI Analytics Hub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                <span>Kode Sumber <!-- GANTI --></span>
+              </a>
+            </div>
+          </article>
+
+          <!-- PROYEK 4: Prompt-to-App Studio -->
+          <article class="project-card reveal" data-tags="ai-tools web-dev">
+            <div class="project-card-top">
+              <div class="project-meta-row">
+                <div class="project-tags-unboxed">
+                  <span>AI Tools</span>
+                  <span class="project-tag-separator" aria-hidden="true">·</span>
+                  <span>Web Development</span>
+                </div>
+              </div>
+              <h3 class="project-title">[Prompt-to-App Studio] <!-- GANTI --></h3>
+              <p class="project-desc">Alat eksperimental pembuatan prototipe kilat berbasis natural language dengan live execution aman di sandbox browser. <!-- GANTI --></p>
+              
+              <div class="project-features-list">
+                <span class="feature-pill">🪄 Zero-Setup Proto</span>
+                <span class="feature-pill">💻 Sandbox Engine</span>
+                <span class="feature-pill">📦 Hot Reload</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <a href="https://wa.me/62895403019991?text=Halo%20Ilzz%2C%20saya%20ingin%20melihat%20demo%20[Prompt-to-App%20Studio]" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="project-btn project-btn-demo" 
+                 aria-label="Demo Langsung Prompt-to-App Studio">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                <span>Demo Langsung <!-- GANTI --></span>
+              </a>
+              <span class="project-btn project-btn-disabled" title="Repositori proyek internal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                <span>Kode Privat <!-- GANTI --></span>
+              </span>
+            </div>
+          </article>
+
+          <!-- PROYEK 5: Minimal Design System -->
+          <article class="project-card reveal" data-tags="ui-ux web-dev">
+            <div class="project-card-top">
+              <div class="project-meta-row">
+                <div class="project-tags-unboxed">
+                  <span>UI/UX</span>
+                  <span class="project-tag-separator" aria-hidden="true">·</span>
+                  <span>Web Development</span>
+                </div>
+              </div>
+              <h3 class="project-title">[Minimal Design System] <!-- GANTI --></h3>
+              <p class="project-desc">Pustaka antarmuka modular berkinerja tinggi dengan kepatuhan aksesibilitas WCAG AA dan micro-interaction 60fps tanpa layout shift. <!-- GANTI --></p>
+              
+              <div class="project-features-list">
+                <span class="feature-pill">🎨 Design Tokens</span>
+                <span class="feature-pill">♿ WCAG AA 4.5:1</span>
+                <span class="feature-pill">⚡ 60fps Native</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <a href="https://wa.me/62895403019991?text=Halo%20Ilzz%2C%20saya%20ingin%20melihat%20demo%20[Minimal%20Design%20System]" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="project-btn project-btn-demo" 
+                 aria-label="Demo Langsung Minimal Design System">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                <span>Demo Langsung <!-- GANTI --></span>
+              </a>
+              <a href="https://github.com" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="project-btn project-btn-code" 
+                 aria-label="Kode Sumber Minimal Design System">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                <span>Kode Sumber <!-- GANTI --></span>
+              </a>
+            </div>
+          </article>
+
+          <!-- PROYEK 6: Spatial Micro-Interactions Lab -->
+          <article class="project-card reveal" data-tags="ui-ux">
+            <div class="project-card-top">
+              <div class="project-meta-row">
+                <div class="project-tags-unboxed">
+                  <span>UI/UX</span>
+                </div>
+              </div>
+              <h3 class="project-title">[Spatial Micro-Interactions] <!-- GANTI --></h3>
+              <p class="project-desc">Koleksi eksperimental antarmuka dengan efek hover responsif, cursor magnetic, 3D tilt, dan transisi fluid tanpa layout shift. <!-- GANTI --></p>
+              
+              <div class="project-features-list">
+                <span class="feature-pill">🧲 Magnetic Buttons</span>
+                <span class="feature-pill">📐 3D Tilt Matrix</span>
+                <span class="feature-pill">✨ Smooth Reflow</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <a href="https://wa.me/62895403019991?text=Halo%20Ilzz%2C%20saya%20ingin%20melihat%20demo%20[Spatial%20Micro-Interactions]" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="project-btn project-btn-demo" 
+                 aria-label="Demo Langsung Spatial Micro-Interactions">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                <span>Demo Langsung <!-- GANTI --></span>
+              </a>
+              <a href="https://github.com" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="project-btn project-btn-code" 
+                 aria-label="Kode Sumber Spatial Micro-Interactions">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                <span>Kode Sumber <!-- GANTI --></span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. CARA KERJA SECTION -->
+    <section id="cara-kerja" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-kicker">Metodologi</span>
+          <h2 class="section-title">Cara Kerja</h2>
+          <p class="section-desc">3 langkah terukur mewujudkan produk impian dari sketsa hingga produksi.</p>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card reveal">
+            <div class="step-number">01</div>
+            <h3 class="step-title">Diskusi Ide</h3>
+            <p class="step-desc">Membedah masalah, mendefinisikan fitur inti, dan menyusun arah visual yang diinginkan tanpa birokrasi berbelit.</p>
+          </div>
+
+          <div class="step-card reveal">
+            <div class="step-number">02</div>
+            <h3 class="step-title">Bangun dengan AI</h3>
+            <p class="step-desc">Vibe coding cepat menggunakan alat AI mutakhir, iterasi prototipe langsung di browser, dan perbaikan real-time.</p>
+          </div>
+
+          <div class="step-card reveal">
+            <div class="step-number">03</div>
+            <h3 class="step-title">Rilis & Iterasi</h3>
+            <p class="step-desc">Deployment ke server produksi, pengoptimalan performa 60fps, dan penyesuaian akhir berdasarkan masukan nyata.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. KONTAK (CTA PENUTUP) -->
+    <section id="kontak" class="section section-alt">
+      <div class="container">
+        <div class="contact-card reveal">
+          <span class="section-kicker">Hubungi Saya</span>
+          <h2 class="section-title contact-heading">Punya ide proyek menarik? Mari kita wujudkan bersama.</h2>
+          <p class="section-desc">Diskusi santai, konsultasi konsep, atau langsung mulai membangun.</p>
+          
+          <div class="contact-number-display">+62 895-4030-19991</div>
+
+          <div class="contact-actions">
+            <!-- Tombol WhatsApp Besar -->
+            <a href="https://wa.me/62895403019991?text=Halo%20Ilzz%2C%20saya%20tertarik%20berdiskusi%20soal%20proyek" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="btn btn-primary btn-wa-large magnetic-btn">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+              Chat via WhatsApp
+            </a>
+
+            <!-- Tombol Salin Nomor -->
+            <button type="button" class="btn btn-copy-number" id="copy-number-btn" aria-label="Salin nomor WhatsApp Ilzz">
+              <span id="copy-icon-slot">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </span>
+              <span id="copy-btn-text">Salin nomor</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 8. FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <!-- LETAKKAN foto-profil.jpg di folder yang sama dengan index.html -->
+        <img src="foto-profil.jpg" alt="Foto profil Ilzz" width="736" height="736" class="footer-avatar">
+        <span class="footer-copy">© 2026 Ilzz. Vibe Coder. Semua hak cipta dilindungi.</span>
+      </div>
+
+      <!-- Tautan Placeholder Footer -->
+      <ul class="footer-links">
+        <!-- GANTI: Tautan GitHub Anda -->
+        <li><a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub <!-- GANTI --></a></li>
+        <!-- GANTI: Tautan X / Twitter Anda -->
+        <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="footer-link">X / Twitter <!-- GANTI --></a></li>
+        <!-- GANTI: Tautan LinkedIn Anda -->
+        <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn <!-- GANTI --></a></li>
+        <!-- GANTI: Email Anda -->
+        <li><a href="mailto:ilzzzzzzzgg@gmail.com" class="footer-link">Email <!-- GANTI --></a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Toast Notifikasi (aria-live="polite") -->
+  <div id="copy-toast" role="status" aria-live="polite">Nomor tersalin ke clipboard</div>
+
+  <!-- Tombol Kembali ke Atas (Muncul setelah scroll 600px) -->
+  <button type="button" id="back-to-top" aria-label="Kembali ke atas halaman">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="12" y1="19" x2="12" y2="5"></line>
+      <polyline points="5 12 12 5 19 12"></polyline>
+    </svg>
+  </button>
+
+  <!-- Lightbox Foto Profil Sesuai Spesifikasi -->
+  <div id="photo-lightbox" class="lightbox-backdrop" role="dialog" aria-modal="true" aria-label="Pratinjau Foto Profil Ilzz">
+    <div class="lightbox-container">
+      <button type="button" class="lightbox-close-btn" id="lightbox-close" aria-label="Tutup pratinjau foto profil">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <!-- LETAKKAN foto-profil.jpg di folder yang sama dengan index.html -->
+      <img src="foto-profil.jpg" alt="Foto profil Ilzz ukuran penuh" width="736" height="736" class="lightbox-img">
+      <div class="lightbox-caption">Ilzz — Vibe Coder</div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT VANILLA INTERAKTIF & ANIMASI 60FPS -->
+  <script>
+    (function () {
+      'use strict';
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // =========================================================================
+      // 1. PAGE LOAD STAGGER ENTRANCE (Hero Elements, Profile Photo & AI Orbit)
+      // =========================================================================
+      window.addEventListener('DOMContentLoaded', () => {
+        const staggerElements = document.querySelectorAll('.stagger-load');
+        const orbitTrack = document.getElementById('hero-orbit-track');
+        const orbitBadges = document.querySelectorAll('.orbit-ai-badge');
+
+        if (prefersReducedMotion) {
+          staggerElements.forEach(el => el.classList.add('loaded'));
+          if (orbitTrack) orbitTrack.classList.add('loaded');
+          orbitBadges.forEach(b => b.classList.add('pop-in'));
+        } else {
+          // Stagger elemen hero teks & kartu
+          staggerElements.forEach(el => {
+            const index = parseInt(el.getAttribute('data-stagger') || '0', 10);
+            setTimeout(() => {
+              el.classList.add('loaded');
+            }, 80 + index * 110);
+          });
+
+          // Animasi Muncul Pertama (Entrance Animation) Orbit Ring & Logo AI:
+          // 1. Orbit ring mengembang halus (scale 0.65 -> 1 & fade in)
+          // 2. Ke-4 logo AI (Claude, ChatGPT, Gemini, Grok) muncul berurutan (pop-in stagger)
+          // 3. Setelah semua logo tampil penuh, mulai rotasi orbit kontinu 360 derajat
+          if (orbitTrack) {
+            setTimeout(() => {
+              orbitTrack.classList.add('loaded');
+
+              orbitBadges.forEach((badge, idx) => {
+                setTimeout(() => {
+                  badge.classList.add('pop-in');
+                }, 160 + idx * 120);
+              });
+
+              // Mulai rotasi kontinu setelah semua badge muncul sempurna
+              setTimeout(() => {
+                orbitTrack.classList.add('is-spinning');
+              }, 160 + orbitBadges.length * 120 + 350);
+
+            }, 480);
+          }
+        }
+      });
+
+      // =========================================================================
+      // 2. DYNAMIC HERO WORD TICKER (fade/slide setiap 2.5s, mati jika reduced-motion)
+      // =========================================================================
+      const dynamicWordEl = document.getElementById('dynamic-word');
+      const dynamicWords = ['bot WhatsApp', 'produk AI', 'website', 'aplikasi'];
+      let currentWordIndex = 0;
+
+      if (!prefersReducedMotion && dynamicWordEl) {
+        setInterval(() => {
+          // Slide out upward
+          dynamicWordEl.style.transform = 'translateY(-12px)';
+          dynamicWordEl.style.opacity = '0';
+
+          setTimeout(() => {
+            currentWordIndex = (currentWordIndex + 1) % dynamicWords.length;
+            dynamicWordEl.textContent = dynamicWords[currentWordIndex];
+            // Start from bottom
+            dynamicWordEl.style.transform = 'translateY(12px)';
+
+            requestAnimationFrame(() => {
+              dynamicWordEl.style.transform = 'translateY(0)';
+              dynamicWordEl.style.opacity = '1';
+            });
+          }, 350);
+        }, 2500);
+      }
+
+      // =========================================================================
+      // 3. SCROLL PROGRESS BAR & NAVBAR SCROLLED STATE & BACK-TO-TOP
+      // =========================================================================
+      const progressBar = document.getElementById('scroll-progress');
+      const navbar = document.getElementById('main-navbar');
+      const backToTopBtn = document.getElementById('back-to-top');
+
+      function onScroll() {
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+        const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        
+        // Progress bar scaleX
+        if (progressBar && totalHeight > 0) {
+          const progress = Math.min(Math.max(scrollY / totalHeight, 0), 1);
+          progressBar.style.transform = 'scaleX(' + progress + ')';
+        }
+
+        // Navbar blur/border setelah 20px
+        if (navbar) {
+          if (scrollY > 20) {
+            navbar.classList.add('scrolled');
+          } else {
+            navbar.classList.remove('scrolled');
+          }
+        }
+
+        // Back-to-top button setelah 600px
+        if (backToTopBtn) {
+          if (scrollY > 600) {
+            backToTopBtn.classList.add('visible');
+          } else {
+            backToTopBtn.classList.remove('visible');
+          }
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll(); // initial state
+
+      if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+        });
+      }
+
+      // =========================================================================
+      // 4. SCROLL-SPY UNTUK TAUTAN NAVBAR AKTIF
+      // =========================================================================
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      function updateActiveNav() {
+        const scrollPosition = (window.pageYOffset || document.documentElement.scrollTop) + 120;
+        let currentSectionId = '';
+
+        sections.forEach(sec => {
+          const top = sec.offsetTop;
+          const height = sec.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            currentSectionId = sec.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          const href = link.getAttribute('href');
+          if (href === '#' + currentSectionId) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', updateActiveNav, { passive: true });
+
+      // =========================================================================
+      // 5. SCROLL REVEAL (IntersectionObserver threshold 0.15) & COUNT-UP STATS
+      // =========================================================================
+      const revealElements = document.querySelectorAll('.reveal');
+      const counterElements = document.querySelectorAll('.counter-number');
+      let countersTriggered = false;
+
+      function startCounters() {
+        if (countersTriggered) return;
+        countersTriggered = true;
+
+        counterElements.forEach(counter => {
+          const target = parseInt(counter.getAttribute('data-target') || '0', 10);
+          if (prefersReducedMotion) {
+            counter.textContent = target.toString();
+            return;
+          }
+
+          const duration = 1200; // 1.2 detik
+          const startTime = performance.now();
+
+          function updateCounter(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // Easing out cubic: 1 - pow(1 - progress, 3)
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            const currentVal = Math.floor(easeOut * target);
+            counter.textContent = currentVal.toString();
+
+            if (progress < 1) {
+              requestAnimationFrame(updateCounter);
+            } else {
+              counter.textContent = target.toString();
+            }
+          }
+
+          requestAnimationFrame(updateCounter);
+        });
+      }
+
+      if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              
+              // Jika ini adalah section tentang atau di dalamnya terdapat counter
+              if (entry.target.querySelector('.counter-number') || entry.target.classList.contains('about-stats')) {
+                startCounters();
+              }
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.15,
+          rootMargin: '0px 0px -40px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+      } else {
+        // Fallback untuk browser lama
+        revealElements.forEach(el => el.classList.add('is-visible'));
+        startCounters();
+      }
+
+      // =========================================================================
+      // 6. MAGNETIC BUTTON INTERACTION (Hanya di perangkat ber-hover)
+      // =========================================================================
+      const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (hasHover && !prefersReducedMotion) {
+        const magneticButtons = document.querySelectorAll('.magnetic-btn');
+
+        magneticButtons.forEach(btn => {
+          btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const btnCenterX = rect.left + rect.width / 2;
+            const btnCenterY = rect.top + rect.height / 2;
+
+            // Offset max 6px
+            const deltaX = (e.clientX - btnCenterX) / (rect.width / 2);
+            const deltaY = (e.clientY - btnCenterY) / (rect.height / 2);
+
+            const moveX = Math.max(Math.min(deltaX * 6, 6), -6);
+            const moveY = Math.max(Math.min(deltaY * 6, 6), -6);
+
+            btn.style.transform = 'translate(' + moveX.toFixed(1) + 'px, ' + moveY.toFixed(1) + 'px)';
+          });
+
+          btn.addEventListener('mouseleave', () => {
+            btn.style.transform = 'translate(0px, 0px)';
+          });
+        });
+      }
+
+      // =========================================================================
+      // 7. DESKTOP 3D TILT & MOUSE TRACKING PADA KARTU PROYEK (Maks 4 derajat)
+      // =========================================================================
+      if (hasHover && !prefersReducedMotion) {
+        const projectCards = document.querySelectorAll('.project-card');
+
+        projectCards.forEach(card => {
+          let rafId = null;
+
+          card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = ((centerY - y) / centerY) * 4; // max 4 deg
+            const rotateY = ((x - centerX) / centerX) * 4; // max 4 deg
+
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(() => {
+              card.style.transform = 'perspective(1000px) translateY(-5px) rotateX(' + rotateX.toFixed(2) + 'deg) rotateY(' + rotateY.toFixed(2) + 'deg)';
+            });
+          });
+
+          card.addEventListener('mouseleave', () => {
+            if (rafId) cancelAnimationFrame(rafId);
+            card.style.transform = 'perspective(1000px) translateY(0px) rotateX(0deg) rotateY(0deg)';
+          });
+        });
+      }
+
+      // =========================================================================
+      // 8. FILTER PROYEK BERBASIS TAG DENGAN ANIMASI FADE & CASCADE REFLOW HALUS
+      // =========================================================================
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const projectCards = document.querySelectorAll('.project-card');
+      let currentFilter = 'all';
+
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetFilter = btn.getAttribute('data-filter') || 'all';
+          if (targetFilter === currentFilter) return;
+          currentFilter = targetFilter;
+
+          // Update active state
+          filterButtons.forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-selected', 'false');
+          });
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+
+          if (prefersReducedMotion) {
+            // Immediate toggle jika prefers-reduced-motion aktif
+            projectCards.forEach(card => {
+              const tags = (card.getAttribute('data-tags') || '').split(/\s+/);
+              const matches = targetFilter === 'all' || tags.includes(targetFilter);
+              if (matches) {
+                card.classList.remove('hidden', 'is-filtering-out');
+              } else {
+                card.classList.add('hidden');
+              }
+            });
+            return;
+          }
+
+          // Step 1: Fade out kartu yang tidak cocok
+          projectCards.forEach(card => {
+            const tags = (card.getAttribute('data-tags') || '').split(/\s+/);
+            const matches = targetFilter === 'all' || tags.includes(targetFilter);
+
+            if (!matches) {
+              card.classList.add('is-filtering-out');
+            }
+          });
+
+          // Step 2: Setelah animasi fade-out selesai, sesuaikan grid dan munculkan kartu yang cocok secara berurutan (cascade)
+          setTimeout(() => {
+            let matchIndex = 0;
+            projectCards.forEach(card => {
+              const tags = (card.getAttribute('data-tags') || '').split(/\s+/);
+              const matches = targetFilter === 'all' || tags.includes(targetFilter);
+
+              if (matches) {
+                card.classList.remove('hidden');
+                card.classList.add('is-filtering-out');
+
+                const staggerDelay = matchIndex * 40;
+                matchIndex++;
+
+                setTimeout(() => {
+                  requestAnimationFrame(() => {
+                    card.classList.remove('is-filtering-out');
+                  });
+                }, staggerDelay);
+              } else {
+                card.classList.add('hidden');
+                card.classList.remove('is-filtering-out');
+              }
+            });
+          }, 180);
+        });
+      });
+
+      // =========================================================================
+      // 9. MENU MOBILE HAMBURGER
+      // =========================================================================
+      const hamburgerBtn = document.getElementById('hamburger-btn');
+      const hamburgerIcon = document.getElementById('hamburger-icon');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileLinks = document.querySelectorAll('.mobile-nav-link, .mobile-cta');
+
+      let isMenuOpen = false;
+
+      function toggleMobileMenu(open) {
+        isMenuOpen = typeof open === 'boolean' ? open : !isMenuOpen;
+        hamburgerBtn.setAttribute('aria-expanded', isMenuOpen ? 'true' : 'false');
+
+        if (isMenuOpen) {
+          mobileMenu.classList.add('open');
+          // Icon to X
+          hamburgerIcon.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>';
+          hamburgerBtn.setAttribute('aria-label', 'Tutup menu navigasi');
+        } else {
+          mobileMenu.classList.remove('open');
+          // Icon to Hamburger
+          hamburgerIcon.innerHTML = '<line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line>';
+          hamburgerBtn.setAttribute('aria-label', 'Buka menu navigasi');
+        }
+      }
+
+      if (hamburgerBtn) {
+        hamburgerBtn.addEventListener('click', () => toggleMobileMenu());
+      }
+
+      // Close mobile menu on clicking any link
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', () => toggleMobileMenu(false));
+      });
+
+      // =========================================================================
+      // 10. TOMBOL SALIN NOMOR WHATSAPP & TOAST
+      // =========================================================================
+      const copyBtn = document.getElementById('copy-number-btn');
+      const copyIconSlot = document.getElementById('copy-icon-slot');
+      const copyBtnText = document.getElementById('copy-btn-text');
+      const copyToast = document.getElementById('copy-toast');
+      const phoneNumber = '+62 895-4030-19991';
+      let toastTimeout = null;
+
+      if (copyBtn) {
+        copyBtn.addEventListener('click', async () => {
+          try {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              await navigator.clipboard.writeText(phoneNumber);
+            } else {
+              // Fallback
+              const textArea = document.createElement('textarea');
+              textArea.value = phoneNumber;
+              textArea.style.position = 'fixed';
+              textArea.style.left = '-9999px';
+              document.body.appendChild(textArea);
+              textArea.focus();
+              textArea.select();
+              document.execCommand('copy');
+              document.body.removeChild(textArea);
+            }
+
+            // Ganti icon menjadi centang selama 2 detik
+            if (copyIconSlot) {
+              copyIconSlot.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--blue-600);"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+            }
+            if (copyBtnText) {
+              copyBtnText.textContent = 'Tersalin!';
+            }
+
+            // Tampilkan toast
+            if (copyToast) {
+              copyToast.classList.add('show');
+              if (toastTimeout) clearTimeout(toastTimeout);
+              toastTimeout = setTimeout(() => {
+                copyToast.classList.remove('show');
+              }, 2500);
+            }
+
+            // Reset icon & text setelah 2 detik
+            setTimeout(() => {
+              if (copyIconSlot) {
+                copyIconSlot.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+              }
+              if (copyBtnText) {
+                copyBtnText.textContent = 'Salin nomor';
+              }
+            }, 2000);
+
+          } catch (err) {
+            console.error('Gagal menyalin:', err);
+          }
+        });
+      }
+
+      // =========================================================================
+      // 11. LIGHTBOX FOTO PROFIL (Klik foto hero untuk membuka)
+      // =========================================================================
+      const heroPhotoBox = document.getElementById('hero-photo-box');
+      const photoLightbox = document.getElementById('photo-lightbox');
+      const lightboxCloseBtn = document.getElementById('lightbox-close');
+
+      function openLightbox() {
+        if (!photoLightbox) return;
+        photoLightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        if (lightboxCloseBtn) lightboxCloseBtn.focus();
+      }
+
+      function closeLightbox() {
+        if (!photoLightbox) return;
+        photoLightbox.classList.remove('open');
+        document.body.style.overflow = '';
+        if (heroPhotoBox) heroPhotoBox.focus();
+      }
+
+      if (heroPhotoBox) {
+        heroPhotoBox.addEventListener('click', openLightbox);
+        heroPhotoBox.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openLightbox();
+          }
+        });
+      }
+
+      if (lightboxCloseBtn) {
+        lightboxCloseBtn.addEventListener('click', closeLightbox);
+      }
+
+      if (photoLightbox) {
+        // Klik di luar gambar untuk menutup
+        photoLightbox.addEventListener('click', (e) => {
+          if (e.target === photoLightbox) {
+            closeLightbox();
+          }
+        });
+      }
+
+      // Keyboard Trap / Escape listener global
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          if (photoLightbox && photoLightbox.classList.contains('open')) {
+            closeLightbox();
+          }
+          if (isMenuOpen) {
+            toggleMobileMenu(false);
+          }
+        }
+      });
+
+      // =========================================================================
+      // 12. DYNAMIC DARK MODE THEME TOGGLE DENGAN TRANSISI HALUS
+      // =========================================================================
+      const themeToggleBtn = document.getElementById('theme-toggle-btn');
+      const mobileThemeBtn = document.getElementById('mobile-theme-btn');
+      const mobileThemeText = document.getElementById('mobile-theme-text');
+      const mobileThemeIcon = document.getElementById('mobile-theme-icon');
+
+      function getCurrentTheme() {
+        return document.documentElement.getAttribute('data-theme') || 
+               (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      }
+
+      function updateThemeUI(theme) {
+        const isDark = theme === 'dark';
+        if (themeToggleBtn) {
+          themeToggleBtn.setAttribute('aria-label', isDark ? 'Ganti ke mode terang' : 'Ganti ke mode gelap');
+          themeToggleBtn.setAttribute('title', isDark ? 'Ganti ke mode terang' : 'Ganti ke mode gelap');
+        }
+        if (mobileThemeText) {
+          mobileThemeText.textContent = isDark ? 'Mode Terang' : 'Mode Gelap';
+        }
+        if (mobileThemeIcon) {
+          if (isDark) {
+            mobileThemeIcon.innerHTML = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+          } else {
+            mobileThemeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+          }
+        }
+      }
+
+      function toggleTheme() {
+        const currentTheme = getCurrentTheme();
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        if (!prefersReducedMotion) {
+          document.documentElement.classList.add('theme-transitioning');
+        }
+
+        document.documentElement.setAttribute('data-theme', newTheme);
+        try {
+          localStorage.setItem('ilzz_theme', newTheme);
+        } catch (e) {}
+
+        updateThemeUI(newTheme);
+
+        if (!prefersReducedMotion) {
+          setTimeout(() => {
+            document.documentElement.classList.remove('theme-transitioning');
+          }, 400);
+        }
+      }
+
+      if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', toggleTheme);
+      }
+      if (mobileThemeBtn) {
+        mobileThemeBtn.addEventListener('click', toggleTheme);
+      }
+
+      // Sinkronisasi dinamis jika preferensi sistem OS berubah saat tab aktif
+      if (window.matchMedia) {
+        const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        colorSchemeQuery.addEventListener('change', (e) => {
+          try {
+            if (!localStorage.getItem('ilzz_theme')) {
+              const newTheme = e.matches ? 'dark' : 'light';
+              document.documentElement.setAttribute('data-theme', newTheme);
+              updateThemeUI(newTheme);
+            }
+          } catch (err) {}
+        });
+      }
+
+      // Inisialisasi status tampilan tombol sesuai tema aktif saat ini
+      updateThemeUI(getCurrentTheme());
+
+    })();
+  </script>
+</body>
+</html>
